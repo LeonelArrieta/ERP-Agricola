@@ -1,0 +1,11 @@
+/.env
+/vendor/
+/node_modules/
+
+/storage/logs/*.log
+/storage/cache/*
+/storage/arca/*
+
+!/storage/logs/.gitkeep
+!/storage/cache/.gitkeep
+!/storage/arca/.gitkeep

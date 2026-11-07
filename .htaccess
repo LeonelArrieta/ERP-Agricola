@@ -1,0 +1,24 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Assets publicos.
+RewriteRule ^assets/(.*)$ public/assets/$1 [END,QSA]
+
+# Archivos y directorios ocultos (.env, .git, .opencode, .user.ini, etc.).
+RewriteRule (^|/)\. - [F,L]
+
+# Directorios internos.
+RewriteRule ^(vendor|database|storage|deploy)(/|$) - [F,L]
+
+# Archivos sensibles de la raiz.
+RewriteRule ^composer\.(json|lock)$ - [F,L]
+RewriteRule \.(md|sql|log|ini|pem|key|crt|csr|lock)$ - [F,L]
+
+# Nunca ejecutar PHP interno desde la web; /app/* sigue siendo una ruta valida.
+RewriteRule ^app/.*\.php$ - [F,L]
+
+# Front controller.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

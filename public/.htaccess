@@ -1,0 +1,15 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Compatibilidad local: /public/* pasa a la raiz del proyecto.
+RewriteCond %{THE_REQUEST} \s/+(.+?)/public/?(.*?)(?:\s|\?) [NC]
+RewriteRule ^ /%1/%2 [R=301,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
